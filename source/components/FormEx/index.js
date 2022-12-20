@@ -13,7 +13,7 @@ const Form = () => {
   const handleChange = (field, value) => {
     setValues({...values, [field]: value});
   };
-  // console.log('===>>>values', values);
+  console.log('===>>>values', values);
 
   const handleSubmit = () => {
     console.log('Values===>>', values);
