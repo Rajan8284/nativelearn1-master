@@ -1,6 +1,7 @@
 import {
   Image,
   ImageBackground,
+  SafeAreaView,
   FlatList,
   ScrollView,
   View,
@@ -11,8 +12,9 @@ import {
   TouchableHighlight,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import style from './style';
 import data from '../../data.json';
+import React, {useState} from 'react';
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -230,7 +232,7 @@ const Form = () => {
         {data.map(item => {
           console.log(item, '====>>>');
           return (
-            <View>
+            <View key={item.value}>
               <Text style={style.text}>{item.color}</Text>
             </View>
           );
