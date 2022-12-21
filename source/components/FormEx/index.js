@@ -230,10 +230,10 @@ const Form = () => {
           )}
         />
         {data.map(item => {
-          console.log(item, '====>>>');
           return (
             <View key={item.value}>
-              <Text style={style.text}>{item.color}</Text>
+              <Text style={style.text}>Color: {item.color}</Text>
+              <Text style={style.text}>value: {item.value}</Text>
             </View>
           );
         })}
