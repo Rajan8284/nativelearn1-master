@@ -53,8 +53,9 @@ const style = StyleSheet.create({
     color: COLORS.white,
   },
   showError: {
-    color: 'red',
+    marginTop: 7,
     marginBottom: 10,
+    color: 'red',
   },
   forgotpassword: {
     color: COLORS.primary,

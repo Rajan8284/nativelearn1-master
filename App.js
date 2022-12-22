@@ -7,8 +7,8 @@ import Forgotpassword from './source/components/Signup/Forgotpassword';
 const App = () => {
   return (
     <View>
-      {/* <Forgotpassword /> */}
       <Login />
+      {/* <Forgotpassword /> */}
     </View>
   );
 };
