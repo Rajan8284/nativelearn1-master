@@ -2,13 +2,13 @@ import {Text, View} from 'react-native';
 import React, {Component} from 'react';
 import InputExample from './source/components/InputEx';
 import Form from './source/components/FormEx';
-import CompList from './source/components/FlatlistEx';
+import Login from './source/components/Signup/Login';
+import Forgotpassword from './source/components/Signup/Forgotpassword';
 const App = () => {
   return (
     <View>
-      {/* <InputExample /> */}
-      <Form />
-      <CompList />
+      {/* <Forgotpassword /> */}
+      <Login />
     </View>
   );
 };
