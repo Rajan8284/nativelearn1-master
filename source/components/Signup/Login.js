@@ -37,6 +37,7 @@ const Login = () => {
             style={style.input}
             placeholder="Enter your Password"
             name="password"
+            secureTextEntry={true}
             keyboardType="text"
             placeholderTextColor="grey"
             value={values.phonenumber}
