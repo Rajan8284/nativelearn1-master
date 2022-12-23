@@ -50,17 +50,22 @@ class ContactController extends React.Component {
     let response = await ContactService.postLogin(post);
     console.log('---', response);
     return response;
+  }
 
-    // if (response && response.status) {
-    //   return response;
-    // } else {
-    //   ToastAndroid.showWithGravity(
-    //     response.message,
-    //     ToastAndroid.SHORT,
-    //     ToastAndroid.TOP,
-    //   );
-    //   return null;
-    // }
+  async postforgotDetail(data) {
+    let post = {
+      email: data,
+    };
+    let response = await ContactService.postForgot(post);
+    console.log('Forgotpasswpord====>>', response);
+    return response;
+  }
+  async postOtpDetail(data, token) {
+    let post = {
+      otp: data,
+    };
+    let response = await ContactService.postVerifyOtp(post, token);
+    return response;
   }
 }
 export default ContactController;

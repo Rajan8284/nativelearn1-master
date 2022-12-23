@@ -59,7 +59,13 @@ const style = StyleSheet.create({
   },
   forgotpassword: {
     color: COLORS.primary,
-    marginTop: 10,
+    marginTop: 20,
+    fontSize: 15,
+  },
+  resendotp: {
+    color: COLORS.primary,
+    textAlign: 'center',
+    marginTop: 8,
     fontSize: 15,
   },
 });

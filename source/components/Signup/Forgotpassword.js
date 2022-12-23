@@ -6,9 +6,11 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import style from './Style';
+import {Link} from '@react-navigation/native';
 import LoginService from '../function.controller/Login.services';
-const Forgotpassword = () => {
-  const {values, handleChange, isError, handleSubmit} = LoginService();
+const Forgotpassword = ({navigation}) => {
+  const {handleChange, isError, handleSubmit1, email} = LoginService();
+  console.log('email==>', email);
   return (
     <View style={style.main}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -21,11 +23,11 @@ const Forgotpassword = () => {
           <Text style={style.text}>Email Address</Text>
           <TextInput
             style={style.input}
-            placeholder="Enter your Email"
+            placeholder="Enter your email address"
             name="email"
             keyboardType="text"
             placeholderTextColor="grey"
-            value={values.email}
+            value={email}
             onChangeText={e => handleChange('email', e)}
           />
           {isError.email.message ? (
@@ -35,9 +37,9 @@ const Forgotpassword = () => {
           <TouchableOpacity
             style={style.button}
             onPress={() => {
-              handleSubmit();
+              handleSubmit1();
             }}>
-            <Text style={style.buttontext}>Login</Text>
+            <Text style={style.buttontext}>Send OTP</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

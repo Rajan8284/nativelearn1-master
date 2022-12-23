@@ -1,15 +1,19 @@
-import {Text, View} from 'react-native';
 import React, {Component} from 'react';
-import InputExample from './source/components/InputEx';
-import Form from './source/components/FormEx';
 import Login from './source/components/Signup/Login';
 import Forgotpassword from './source/components/Signup/Forgotpassword';
+import Otp from './source/components/Signup/Otp';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+const Stack = createNativeStackNavigator();
 const App = () => {
   return (
-    <View>
-      <Login />
-      {/* <Forgotpassword /> */}
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Forgotpassword" component={Forgotpassword} />
+        <Stack.Screen name="Otp" component={Otp} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

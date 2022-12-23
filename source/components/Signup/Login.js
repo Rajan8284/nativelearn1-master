@@ -4,12 +4,16 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
+  Button,
 } from 'react-native';
+import {Link} from '@react-navigation/native';
 import React from 'react';
 import LoginService from '../function.controller/Login.services';
 import style from './Style';
+
 const Login = () => {
   const {values, handleChange, isError, handleSubmit} = LoginService();
+  console.log('===>>>', values);
   return (
     <View style={style.main}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -40,14 +44,15 @@ const Login = () => {
             secureTextEntry={true}
             keyboardType="text"
             placeholderTextColor="grey"
-            value={values.phonenumber}
+            value={values.password}
             onChangeText={e => handleChange('password', e)}
           />
           {isError.password.message ? (
             <Text style={style.showError}>{isError.password.message}</Text>
           ) : null}
-          <Text style={style.forgotpassword}>Forgot password?</Text>
-
+          <Link to={{screen: 'Forgotpassword'}} style={style.forgotpassword}>
+            Forgot password?
+          </Link>
           <TouchableOpacity
             style={style.button}
             onPress={() => {
