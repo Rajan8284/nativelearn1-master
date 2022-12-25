@@ -4,7 +4,7 @@ import Forgotpassword from './source/components/Signup/Forgotpassword';
 import Otp from './source/components/Signup/Otp';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-const Stack = createNativeStackNavigator();
+ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>

@@ -60,10 +60,13 @@ class ContactController extends React.Component {
     console.log('Forgotpasswpord====>>', response);
     return response;
   }
-  async postOtpDetail(data, token) {
+  async postOtpDetail(data, res) {
     let post = {
       otp: data,
     };
+let token={
+  token:res.token,
+}
     let response = await ContactService.postVerifyOtp(post, token);
     return response;
   }

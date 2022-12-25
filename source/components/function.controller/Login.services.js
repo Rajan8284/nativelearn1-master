@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import Validation from '../helper/Validation';
 import {ToastAndroid} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import ContactController from '../apis/controllers/contact.controller';
 const LoginService = () => {
   const [isError, setError] = useState({
@@ -25,13 +26,14 @@ const LoginService = () => {
     password: '',
   });
   const [email, setEmail] = useState('');
-  const [otp, SetOtp] = useState('');
+  const [otp, setOtp] = useState('');
   const [token, setToken] = useState(null);
   const handleChange = (field, value) => {
     let validation = new Validation(isError);
     let node = validation.validateField(field, value);
     setError({...isError, [field]: node});
     setEmail({...email, [field]: value});
+    setOtp({...otp, [field]: value});
     setValues({...values, [field]: value});
   };
   const handleSubmit = () => {
@@ -66,6 +68,8 @@ const LoginService = () => {
       console.log('===Error>>', response.message);
     }
   };
+  
+
   const handleSubmit1 = () => {
     let validation = new Validation(isError);
     let isValid = validation.isFormValid(email);
@@ -76,17 +80,20 @@ const LoginService = () => {
     }
   };
 
+   
+
+  const navigation = useNavigation();
   const Forgotpassword = async () => {
     const response = await new ContactController().postforgotDetail(email);
     if (response && response.status) {
+      navigation.navigate('Otp', {name: 'Otp'});
       setToken(response.token);
       ToastAndroid.showWithGravity(
         response.message,
         ToastAndroid.LONG,
         ToastAndroid.TOP,
       );
-      navigation.navigate('Otp', {name: 'Otp'});
-      console.log('Response Token===>>>', response.token);
+     
     } else {
       ToastAndroid.showWithGravity(
         response.message,
@@ -105,6 +112,7 @@ const LoginService = () => {
     }
   };
   const verifyOtp = async () => {
+    console.log("Response Tokennnnnnn vvv------===>>>",token)
     const response = await new ContactController().postOtpDetail(email, token);
     if (response && response.status) {
       console.log('Response===>>', response);

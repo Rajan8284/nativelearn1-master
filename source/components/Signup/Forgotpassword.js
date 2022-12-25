@@ -8,7 +8,7 @@ import {
 import style from './Style';
 import {Link} from '@react-navigation/native';
 import LoginService from '../function.controller/Login.services';
-const Forgotpassword = ({navigation}) => {
+const Forgotpassword = () => {
   const {handleChange, isError, handleSubmit1, email} = LoginService();
   console.log('email==>', email);
   return (
@@ -38,6 +38,7 @@ const Forgotpassword = ({navigation}) => {
             style={style.button}
             onPress={() => {
               handleSubmit1();
+              
             }}>
             <Text style={style.buttontext}>Send OTP</Text>
           </TouchableOpacity>
