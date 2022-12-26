@@ -8,6 +8,7 @@ import {
 import style from './Style';
 import LoginService from '../function.controller/Login.services';
 import React from 'react';
+import SuccessModal from './SuccessModal';
 const Newpassword = ({route}) => {
   console.log('=====>>>Route', route);
   const {token} = route.params;
@@ -66,6 +67,8 @@ const Newpassword = ({route}) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+
+      <SuccessModal />
     </View>
   );
 };

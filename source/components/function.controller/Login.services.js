@@ -50,6 +50,12 @@ const LoginService = () => {
     setRecover({...recover, [field]: value});
     setValues({...values, [field]: value});
   };
+
+  const [isModalVisible, setModalVisible] = useState(true);
+  const toggleModal = () => {
+    setModalVisible(true);
+  };
+
   const handleSubmit = () => {
     let validation = new Validation(isError);
     let isValid = validation.isFormValid(values);
@@ -193,7 +199,8 @@ const LoginService = () => {
     isError,
     values,
     recover,
-    modalVisible,
+    isModalVisible,
+    toggleModal,
     setModalVisible,
     handleChange,
     handleSubmit,

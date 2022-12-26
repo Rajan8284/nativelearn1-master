@@ -4,15 +4,22 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
-  Button,
 } from 'react-native';
+import SuccessModal from './SuccessModal';
 import {Link} from '@react-navigation/native';
 import React from 'react';
 import LoginService from '../function.controller/Login.services';
 import style from './Style';
 
 const Login = () => {
-  const {values, handleChange, isError, handleSubmit} = LoginService();
+  const {
+    values,
+    handleChange,
+    isError,
+    handleSubmit,
+    toggleModal,
+    isModalVisible,
+  } = LoginService();
   console.log('===>>>', values);
   return (
     <View style={style.main}>
@@ -56,12 +63,21 @@ const Login = () => {
           <TouchableOpacity
             style={style.button}
             onPress={() => {
+              toggleModal();
+            }}>
+            <Text style={style.buttontext}>Modal</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={style.button}
+            onPress={() => {
               handleSubmit();
             }}>
             <Text style={style.buttontext}>Login</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <SuccessModal></SuccessModal>
     </View>
   );
 };
