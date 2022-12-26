@@ -10,7 +10,7 @@ import {Link} from '@react-navigation/native';
 import LoginService from '../function.controller/Login.services';
 const Forgotpassword = () => {
   const {handleChange, isError, handleSubmit1, email} = LoginService();
-  console.log('email==>', email);
+  console.log(email);
   return (
     <View style={style.main}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -38,7 +38,6 @@ const Forgotpassword = () => {
             style={style.button}
             onPress={() => {
               handleSubmit1();
-              
             }}>
             <Text style={style.buttontext}>Send OTP</Text>
           </TouchableOpacity>

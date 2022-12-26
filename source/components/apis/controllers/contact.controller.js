@@ -51,23 +51,21 @@ class ContactController extends React.Component {
     console.log('---', response);
     return response;
   }
-
-  async postforgotDetail(data) {
+  async postPasswordDetail(data, token) {
     let post = {
-      email: data,
+      new_password: data.new_password,
+      confirm_password: data.confirm_password,
     };
-    let response = await ContactService.postForgot(post);
-    console.log('Forgotpasswpord====>>', response);
+    let response = await ContactService.postRecover(post, token);
     return response;
   }
-  async postOtpDetail(data, res) {
-    let post = {
-      otp: data,
-    };
-let token={
-  token:res.token,
-}
-    let response = await ContactService.postVerifyOtp(post, token);
+
+  async postforgotDetail(data) {
+    let response = await ContactService.postForgot(data);
+    return response;
+  }
+  async postOtpDetail(data, token) {
+    let response = await ContactService.postVerifyOtp(data, token);
     return response;
   }
 }

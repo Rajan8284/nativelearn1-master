@@ -10,8 +10,9 @@ import React from 'react';
 import {Link} from '@react-navigation/native';
 import LoginService from '../function.controller/Login.services';
 import style from './Style';
-const Otp = () => {
-  const {handleChange, isError, handleSubmit2} = LoginService();
+const Otp = ({route}) => {
+  const {token} = route.params;
+  const {handleChange, isError, resendOtp, handleSubmit2} = LoginService();
   return (
     <View style={style.main}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -32,13 +33,18 @@ const Otp = () => {
             <Text style={style.showError}>{isError.otp.message}</Text>
           ) : null}
           <Text style={style.headingdis}>Didn't receive OTP?</Text>
-          <Link to={{screen: 'Forgotpassword'}} style={style.resendotp}>
-            Resend OTP
-          </Link>
+
+          <TouchableOpacity
+            onPress={() => {
+              resendOtp();
+            }}>
+            <Text style={style.resendotp}>Resend OTP</Text>
+          </TouchableOpacity>
+
           <TouchableOpacity
             style={style.button}
             onPress={() => {
-              handleSubmit2();
+              handleSubmit2(token);
             }}>
             <Text style={style.buttontext}>Verify</Text>
           </TouchableOpacity>
