@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import SuccessModal from './SuccessModal';
 import {Link} from '@react-navigation/native';
 import React from 'react';
 import LoginService from '../function.controller/Login.services';
@@ -17,8 +16,6 @@ const Login = () => {
     handleChange,
     isError,
     handleSubmit,
-    modalVisible,
-    setModalVisible
     } = LoginService();
   console.log('===>>>', values);
   return (
