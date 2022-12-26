@@ -17,9 +17,9 @@ const Login = () => {
     handleChange,
     isError,
     handleSubmit,
-    toggleModal,
-    isModalVisible,
-  } = LoginService();
+    modalVisible,
+    setModalVisible
+    } = LoginService();
   console.log('===>>>', values);
   return (
     <View style={style.main}>
@@ -63,21 +63,12 @@ const Login = () => {
           <TouchableOpacity
             style={style.button}
             onPress={() => {
-              toggleModal();
-            }}>
-            <Text style={style.buttontext}>Modal</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={style.button}
-            onPress={() => {
               handleSubmit();
             }}>
             <Text style={style.buttontext}>Login</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <SuccessModal></SuccessModal>
     </View>
   );
 };

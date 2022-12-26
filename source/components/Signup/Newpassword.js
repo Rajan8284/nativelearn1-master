@@ -67,8 +67,6 @@ const Newpassword = ({route}) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-      <SuccessModal />
     </View>
   );
 };

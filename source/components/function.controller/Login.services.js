@@ -51,7 +51,7 @@ const LoginService = () => {
     setValues({...values, [field]: value});
   };
 
-  const [isModalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(true);
   };
@@ -178,6 +178,8 @@ const LoginService = () => {
       token,
     );
     if (response && response.status) {
+      navigation.navigate('Login');
+      setModalVisible(true);
       console.log('Response===>>', response);
       ToastAndroid.showWithGravity(
         response.message,
@@ -199,7 +201,7 @@ const LoginService = () => {
     isError,
     values,
     recover,
-    isModalVisible,
+    modalVisible,
     toggleModal,
     setModalVisible,
     handleChange,
