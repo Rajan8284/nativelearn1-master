@@ -2,6 +2,7 @@ import {
   View,
   Text,
   ScrollView,
+  Button,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
@@ -9,6 +10,7 @@ import {Link} from '@react-navigation/native';
 import React from 'react';
 import LoginService from '../function.controller/Login.services';
 import style from './Style';
+import SuccessModal from './SuccessModal';
 
 const Login = () => {
   const {
@@ -16,6 +18,9 @@ const Login = () => {
     handleChange,
     isError,
     handleSubmit,
+    isModalVisible,
+    setModalVisible,
+    toggleModal
     } = LoginService();
   console.log('===>>>', values);
   return (
@@ -61,11 +66,17 @@ const Login = () => {
             style={style.button}
             onPress={() => {
               handleSubmit();
+              
             }}>
             <Text style={style.buttontext}>Login</Text>
           </TouchableOpacity>
+          <Button title="Show modal" onPress={()=>setModalVisible(true)} />
         </View>
       </ScrollView>
+
+      {isModalVisible ?
+        <SuccessModal />
+         :""} 
     </View>
   );
 };

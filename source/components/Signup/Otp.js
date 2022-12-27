@@ -36,7 +36,7 @@ const Otp = ({route}) => {
 
           <TouchableOpacity
             onPress={() => {
-              resendOtp();
+              resendOtp(token);
             }}>
             <Text style={style.resendotp}>Resend OTP</Text>
           </TouchableOpacity>

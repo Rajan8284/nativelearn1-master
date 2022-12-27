@@ -1,7 +1,7 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import Validation from '../helper/Validation';
-import {ToastAndroid} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { ToastAndroid } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import ContactController from '../apis/controllers/contact.controller';
 const LoginService = () => {
   const [isError, setError] = useState({
@@ -39,30 +39,33 @@ const LoginService = () => {
     new_password: '',
     confirm_password: '',
   });
-  const [email, setEmail] = useState('');
-  const [otp, setOtp] = useState('');
+  const [email, setEmail] = useState({
+    email:""
+  });
+  const [otp, setOtp] = useState("");
   const handleChange = (field, value) => {
     let validation = new Validation(isError);
     let node = validation.validateField(field, value);
-    setError({...isError, [field]: node});
-    setEmail({...email, [field]: value});
-    setOtp({...otp, [field]: value});
-    setRecover({...recover, [field]: value});
-    setValues({...values, [field]: value});
+    setError({ ...isError, [field]: node });
+    setEmail({ ...email, [field]: value });
+    setOtp({ ...otp, [field]: value });
+    setRecover({ ...recover, [field]: value });
+    setValues({ ...values, [field]: value });
   };
 
-  const [modalVisible, setModalVisible] = useState(false);
+
+  const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(true);
   };
-
+ 
   const handleSubmit = () => {
     let validation = new Validation(isError);
     let isValid = validation.isFormValid(values);
     if (isValid && !isValid.haveError) {
       userLogin();
     } else {
-      setError({...isValid.errors});
+      setError({ ...isValid.errors });
     }
   };
 
@@ -91,7 +94,7 @@ const LoginService = () => {
     if (isValid && !isValid.haveError) {
       forgotPassword();
     } else {
-      setError({...isValid.errors});
+      setError({ ...isValid.errors });
     }
   };
 
@@ -99,7 +102,7 @@ const LoginService = () => {
   const forgotPassword = async () => {
     const response = await new ContactController().postforgotDetail(email);
     if (response && response.status) {
-      navigation.navigate('Otp', {token: response.token});
+      navigation.navigate('Otp', { token: response.token });
       ToastAndroid.showWithGravity(
         response.message,
         ToastAndroid.LONG,
@@ -114,8 +117,8 @@ const LoginService = () => {
     }
   };
 
-  const resendOtp = async () => {
-    const response = await new ContactController().postforgotDetail(email);
+  const resendOtp = async (token) => {
+    const response = await new ContactController().postTokenDetail(token);
     if (response && response.status) {
       ToastAndroid.showWithGravity(
         response.message,
@@ -136,14 +139,14 @@ const LoginService = () => {
     if (isValid && !isValid.haveError) {
       verifyOtp(token);
     } else {
-      setError({...isValid.errors});
+      setError({ ...isValid.errors });
     }
   };
   console.log(otp);
   const verifyOtp = async token => {
     const response = await new ContactController().postOtpDetail(otp, token);
     if (response && response.status) {
-      navigation.navigate('Newpassword', {token: response.user.token});
+      navigation.navigate('Newpassword', { token: response.user.token });
       console.log('Response=====>>>', response);
       ToastAndroid.showWithGravity(
         response.message,
@@ -168,7 +171,7 @@ const LoginService = () => {
         console.log('Password match');
       }
     } else {
-      setError({...isValid.errors});
+      setError({ ...isValid.errors });
     }
   };
 
@@ -179,7 +182,6 @@ const LoginService = () => {
     );
     if (response && response.status) {
       navigation.navigate('Login');
-      setModalVisible(true);
       console.log('Response===>>', response);
       ToastAndroid.showWithGravity(
         response.message,
@@ -201,9 +203,9 @@ const LoginService = () => {
     isError,
     values,
     recover,
-    modalVisible,
-    toggleModal,
+    isModalVisible,
     setModalVisible,
+    toggleModal,
     handleChange,
     handleSubmit,
     handleSubmit1,

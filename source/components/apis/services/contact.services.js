@@ -7,6 +7,7 @@ const ContactService = {
   postLogin,
   postForgot,
   postVerifyOtp,
+  postResend
 };
 function postDetails(params) {
   return mainWrapper.post(Constant.host + 'auth/prospective-signup', params);
@@ -31,6 +32,10 @@ function postForgot(params) {
 function postRecover(params, token) {
   let url = Constant.host + 'auth/recover-password/' + token;
   return mainWrapper.post(url, params);
+}
+function postResend(token) {
+  let url = Constant.host + 'auth/resend-otp/' + token;
+  return mainWrapper.post(url);
 }
 
 export default ContactService;

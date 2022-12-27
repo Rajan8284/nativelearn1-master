@@ -68,5 +68,10 @@ class ContactController extends React.Component {
     let response = await ContactService.postVerifyOtp(data, token);
     return response;
   }
+  async postTokenDetail(token) {
+    let response = await ContactService.postResend(token);
+    return response;
+  }
+
 }
 export default ContactController;

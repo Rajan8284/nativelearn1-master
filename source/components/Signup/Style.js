@@ -68,5 +68,37 @@ const style = StyleSheet.create({
     marginTop: 8,
     fontSize: 15,
   },
+  mainModal:{
+    alignContent:'center',
+    textAlign:'center'
+  },
+  modal:{
+    flex: 1,
+    marginTop:130,
+    marginBottom:230,
+    borderRadius:15,
+    alignContent:'center',
+    textAlign:'center',
+    backgroundColor:COLORS.white
+  },
+  modaltext:{
+    marginTop:70,
+    color: COLORS.black,
+    fontSize: 35,
+    fontWeight: 'bold',
+    textAlign:'center',
+
+  },
+  modalbutton:{
+    alignContent:"center",
+    marginLeft:16,
+    height: 40,
+    width: "90%",
+    marginTop:70,
+    backgroundColor: COLORS.black,
+    padding: 10,
+    borderColor: 'black',
+    borderRadius: 10,
+  }
 });
 export default style;

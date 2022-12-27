@@ -1,16 +1,28 @@
-import React, {useState} from 'react';
 import Modal from 'react-native-modal';
-import {Text, Button, View} from 'react-native';
+import {Text, Button,TouchableOpacity, View} from 'react-native';
+import React,{useState} from 'react';
 import style from './Style';
 import LoginService from '../function.controller/Login.services';
 const SuccessModal = () => {
-  const {modalVisible, toggleModal} = LoginService();
+  const {isModalVisible,toggleModal,setModalVisible}=LoginService();
+  
   return (
-    <View style={{flex: 1}}>
-      <Modal isVisible={modalVisible}>
-        <View style={{flex: 1}}>
-          <Text style={style.text}>Hello!</Text>
-          <Button title="Hide modal" onPress={toggleModal} />
+    <View style={style.mainModal}>
+      <Button title="Show modal" onPress={toggleModal} />
+      <Modal isVisible={isModalVisible} >
+        <View style={style.modal}>
+          <Text style={style.modaltext}>Success!</Text>
+          <Text style={style.headingdis}>Your password has been updated. </Text>
+          <View style={style.mainModal}>
+          <TouchableOpacity
+            style={style.modalbutton}
+            onPress={() => {
+              setModalVisible(false);
+            }}>
+            <Text style={style.buttontext}>Login</Text>
+          </TouchableOpacity>
+          </View>
+          
         </View>
       </Modal>
     </View>
