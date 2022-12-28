@@ -12,8 +12,7 @@ import SuccessModal from './SuccessModal';
 const Newpassword = ({route}) => {
   console.log('=====>>>Route', route);
   const {token} = route.params;
-  console.log('====>>>Token at Newpassword screan', token);
-  const {handleChange, isError, recover, handleSubmit3} = LoginService();
+  const {handleChange, isError, recover, handleSubmit3, isModalVisible,setModalVisible} = LoginService();
   return (
     <View style={style.main}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -67,6 +66,12 @@ const Newpassword = ({route}) => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      {isModalVisible ? (
+        <SuccessModal
+          isModalVisible={isModalVisible}
+          setModalVisible={setModalVisible}
+        />
+      ) : null}
     </View>
   );
 };

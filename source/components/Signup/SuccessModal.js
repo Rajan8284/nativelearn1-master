@@ -2,8 +2,10 @@ import Modal from 'react-native-modal';
 import {Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import style from './Style';
+import LoginService from '../function.controller/Login.services';
 const SuccessModal = props => {
   const {isModalVisible, setModalVisible} = props;
+  const {navigation}=LoginService();
   console.log('-----MODAL-------', isModalVisible);
   return (
     <Modal isVisible={isModalVisible}>
@@ -15,6 +17,7 @@ const SuccessModal = props => {
             style={style.modalbutton}
             onPress={() => {
               setModalVisible(false);
+              navigation.navigate('Login');
             }}>
             <Text style={style.buttontext}>Login</Text>
           </TouchableOpacity>

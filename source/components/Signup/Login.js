@@ -6,11 +6,10 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {Link} from '@react-navigation/native';
+import { Link } from '@react-navigation/native';
 import React from 'react';
 import LoginService from '../function.controller/Login.services';
 import style from './Style';
-import SuccessModal from './SuccessModal';
 
 const Login = () => {
   const {
@@ -18,14 +17,11 @@ const Login = () => {
     handleChange,
     isError,
     handleSubmit,
-    isModalVisible,
-    setModalVisible,
-    toggleModal,
   } = LoginService();
-  // console.log('Login screan===>>>', isModalVisible);
+
   return (
     <View style={style.main}>
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Text style={style.heading}>Welcome Back</Text>
         <Text style={style.headingdis}>
           You can search course, and apply course and find scholarship for
@@ -59,7 +55,7 @@ const Login = () => {
           {isError.password.message ? (
             <Text style={style.showError}>{isError.password.message}</Text>
           ) : null}
-          <Link to={{screen: 'Forgotpassword'}} style={style.forgotpassword}>
+          <Link to={{ screen: 'Forgotpassword' }} style={style.forgotpassword}>
             Forgot password?
           </Link>
           <TouchableOpacity
@@ -71,13 +67,6 @@ const Login = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-      {isModalVisible ? (
-        <SuccessModal
-          isModalVisible={isModalVisible}
-          setModalVisible={setModalVisible}
-        />
-      ) : null}
     </View>
   );
 };

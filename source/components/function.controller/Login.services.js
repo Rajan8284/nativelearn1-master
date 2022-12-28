@@ -44,6 +44,8 @@ const LoginService = () => {
     email: '',
   });
   const [otp, setOtp] = useState('');
+  const [isModalVisible, setModalVisible] = useState(false);
+  const navigation = useNavigation();
   const handleChange = (field, value) => {
     let validation = new Validation(isError);
     let node = validation.validateField(field, value);
@@ -54,8 +56,7 @@ const LoginService = () => {
     setValues({...values, [field]: value});
   };
 
-  const [isModalVisible, setModalVisible] = useState(false);
-  const navigation = useNavigation();
+  
   // User Login start <<======
   const handleSubmit = () => {
     let validation = new Validation(isError);
@@ -179,7 +180,8 @@ const LoginService = () => {
       token,
     );
     if (response && response.status) {
-      navigation.navigate('Login');
+      setModalVisible(true);
+      // navigation.navigate('Login');
       console.log('Response===>>', response);
       ToastAndroid.showWithGravity(
         response.message,
@@ -270,6 +272,7 @@ const LoginService = () => {
     path1,
     chooseFile,
     chooseFile1,
+    navigation
   };
 };
 
