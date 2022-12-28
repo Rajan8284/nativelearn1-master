@@ -2,26 +2,25 @@ import {
   View,
   Text,
   ScrollView,
-  Button,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { Link } from '@react-navigation/native';
-import React from 'react';
+import {Link} from '@react-navigation/native';
+import React, { useState } from 'react';
 import LoginService from '../function.controller/Login.services';
 import style from './Style';
-
 const Login = () => {
   const {
     values,
     handleChange,
     isError,
     handleSubmit,
-  } = LoginService();
+   } = LoginService();
+  const [showpassword,setShowpassword]=useState(true);
 
   return (
     <View style={style.main}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <Text style={style.heading}>Welcome Back</Text>
         <Text style={style.headingdis}>
           You can search course, and apply course and find scholarship for
@@ -46,16 +45,20 @@ const Login = () => {
             style={style.input}
             placeholder="Enter your Password"
             name="password"
-            secureTextEntry={true}
+            secureTextEntry={showpassword}
             keyboardType="text"
             placeholderTextColor="grey"
             value={values.password}
             onChangeText={e => handleChange('password', e)}
           />
+          {values.password.length > 0 ? <TouchableOpacity
+            onPress={()=>setShowpassword(!showpassword)}>
+            <Text style={style.text}>Show password</Text>
+          </TouchableOpacity>:""}
           {isError.password.message ? (
             <Text style={style.showError}>{isError.password.message}</Text>
           ) : null}
-          <Link to={{ screen: 'Forgotpassword' }} style={style.forgotpassword}>
+          <Link to={{screen: 'Forgotpassword'}} style={style.forgotpassword}>
             Forgot password?
           </Link>
           <TouchableOpacity
@@ -67,6 +70,7 @@ const Login = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+
     </View>
   );
 };
