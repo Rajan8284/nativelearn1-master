@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import {useState} from 'react';
 import Validation from '../helper/Validation';
-import { ToastAndroid } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {ToastAndroid, Alert} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import ContactController from '../apis/controllers/contact.controller';
 const LoginService = () => {
   const [isError, setError] = useState({
@@ -40,69 +41,64 @@ const LoginService = () => {
     confirm_password: '',
   });
   const [email, setEmail] = useState({
-    email:""
+    email: '',
   });
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState('');
   const handleChange = (field, value) => {
     let validation = new Validation(isError);
     let node = validation.validateField(field, value);
-    setError({ ...isError, [field]: node });
-    setEmail({ ...email, [field]: value });
-    setOtp({ ...otp, [field]: value });
-    setRecover({ ...recover, [field]: value });
-    setValues({ ...values, [field]: value });
+    setError({...isError, [field]: node});
+    setEmail({...email, [field]: value});
+    setOtp({...otp, [field]: value});
+    setRecover({...recover, [field]: value});
+    setValues({...values, [field]: value});
   };
-
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const toggleModal = () => {
-    setModalVisible(true);
-  };
- 
+  const navigation = useNavigation();
+  // User Login start <<======
   const handleSubmit = () => {
     let validation = new Validation(isError);
     let isValid = validation.isFormValid(values);
     if (isValid && !isValid.haveError) {
       userLogin();
     } else {
-      setError({ ...isValid.errors });
+      setError({...isValid.errors});
     }
   };
-
   const userLogin = async () => {
     const response = await new ContactController().postLoginDetail(values);
     if (response && response.status) {
+      // setModalVisible(true);
+      navigation.navigate('ImagePicker');
       ToastAndroid.showWithGravity(
         response.message,
         ToastAndroid.LONG,
         ToastAndroid.TOP,
       );
-      console.log('=====>>>>>', response.message);
     } else {
       ToastAndroid.showWithGravity(
         response.message,
         ToastAndroid.SHORT,
         ToastAndroid.TOP,
       );
-      console.log('===Error>>', response.message);
     }
   };
 
+  // Forgot Password Start<<====
   const handleSubmit1 = () => {
     let validation = new Validation(isError);
     let isValid = validation.isFormValid(email);
     if (isValid && !isValid.haveError) {
       forgotPassword();
     } else {
-      setError({ ...isValid.errors });
+      setError({...isValid.errors});
     }
   };
-
-  const navigation = useNavigation();
   const forgotPassword = async () => {
     const response = await new ContactController().postforgotDetail(email);
     if (response && response.status) {
-      navigation.navigate('Otp', { token: response.token });
+      navigation.navigate('Otp', {token: response.token});
       ToastAndroid.showWithGravity(
         response.message,
         ToastAndroid.LONG,
@@ -116,8 +112,8 @@ const LoginService = () => {
       );
     }
   };
-
-  const resendOtp = async (token) => {
+  // Resend OTP Start <<=======
+  const resendOtp = async token => {
     const response = await new ContactController().postTokenDetail(token);
     if (response && response.status) {
       ToastAndroid.showWithGravity(
@@ -133,21 +129,22 @@ const LoginService = () => {
       );
     }
   };
+
+  // Verify OTP and Email <<=======
   const handleSubmit2 = token => {
     let validation = new Validation(isError);
     let isValid = validation.isFormValid(otp);
     if (isValid && !isValid.haveError) {
       verifyOtp(token);
     } else {
-      setError({ ...isValid.errors });
+      setError({...isValid.errors});
     }
   };
   console.log(otp);
   const verifyOtp = async token => {
     const response = await new ContactController().postOtpDetail(otp, token);
     if (response && response.status) {
-      navigation.navigate('Newpassword', { token: response.user.token });
-      console.log('Response=====>>>', response);
+      navigation.navigate('Newpassword', {token: response.user.token});
       ToastAndroid.showWithGravity(
         response.message,
         ToastAndroid.LONG,
@@ -161,6 +158,8 @@ const LoginService = () => {
       );
     }
   };
+
+  //Recover Password <<=======
   const handleSubmit3 = token => {
     let validation = new Validation(isError);
     let isValid = validation.isFormValid(recover);
@@ -171,10 +170,9 @@ const LoginService = () => {
         console.log('Password match');
       }
     } else {
-      setError({ ...isValid.errors });
+      setError({...isValid.errors});
     }
   };
-
   const recoverPassword = async token => {
     const response = await new ContactController().postPasswordDetail(
       recover,
@@ -197,6 +195,61 @@ const LoginService = () => {
     }
   };
 
+  // Upload Media <<<<==========
+  const [path, setPath] = useState(null);
+  const [path1, setPath1] = useState(null);
+  // Choose from gallery
+  const chooseFile = type => {
+    let options = {
+      mediaType: type,
+      maxWidth: 300,
+      maxHeight: 400,
+      quality: 1,
+      saveToPhotos: true,
+      durationLimit: 300,
+    };
+    launchImageLibrary(options, response => {
+      console.log('Response===>> ', response);
+      //   console.log('Response URI====>>>', response.assets[0].uri);
+      if (response.assets) {
+        setPath(response.assets[0].uri);
+      } else if (response.didCancel) {
+        Alert.alert('User cancelled camera picker');
+        return;
+      } else if (response.errorCode) {
+        Alert.alert('something wrong');
+      }
+    });
+  };
+
+  //Choose by camera
+  const chooseFile1 = type => {
+    let options = {
+      mediaType: type,
+      maxWidth: 300,
+      maxHeight: 400,
+      quality: 1,
+      durationLimit: 300,
+      saveToPhotos: true,
+    };
+    launchCamera(options, response => {
+      if (response.assets) {
+        setPath1(response.assets[0].uri);
+      } else if (response.didCancel) {
+        Alert.alert('User cancelled camera picker');
+        return;
+      }
+    });
+  };
+  // const uploadMedia = async () => {
+  //   let response = await new ContactController().postMediaDetail(data);
+  //   if (response && response.status) {
+  //     console.log(response);
+  //   } else {
+  //     console.log('Erorrr====>>>');
+  //   }
+  // };
+
   return {
     email,
     otp,
@@ -205,7 +258,6 @@ const LoginService = () => {
     recover,
     isModalVisible,
     setModalVisible,
-    toggleModal,
     handleChange,
     handleSubmit,
     handleSubmit1,
@@ -214,6 +266,10 @@ const LoginService = () => {
     resendOtp,
     userLogin,
     forgotPassword,
+    path,
+    path1,
+    chooseFile,
+    chooseFile1,
   };
 };
 

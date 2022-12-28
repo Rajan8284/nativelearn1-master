@@ -7,7 +7,8 @@ const ContactService = {
   postLogin,
   postForgot,
   postVerifyOtp,
-  postResend
+  postResend,
+  postMedia,
 };
 function postDetails(params) {
   return mainWrapper.post(Constant.host + 'auth/prospective-signup', params);
@@ -37,5 +38,8 @@ function postResend(token) {
   let url = Constant.host + 'auth/resend-otp/' + token;
   return mainWrapper.post(url);
 }
-
+function postMedia(params) {
+  let url = Constant.imageHost + '/apis/actions/file_upload';
+  return mainWrapper.post(url, params);
+}
 export default ContactService;

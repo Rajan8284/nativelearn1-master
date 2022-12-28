@@ -73,5 +73,10 @@ class ContactController extends React.Component {
     return response;
   }
 
+  async postMediaDetail(data) {
+    let post = {};
+    let response = await ContactService.postMedia(post);
+    return response;
+  }
 }
 export default ContactController;

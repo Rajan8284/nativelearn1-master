@@ -68,37 +68,72 @@ const style = StyleSheet.create({
     marginTop: 8,
     fontSize: 15,
   },
-  mainModal:{
-    alignContent:'center',
-    textAlign:'center'
+  mainModal: {
+    alignContent: 'center',
+    textAlign: 'center',
   },
-  modal:{
+  modal: {
     flex: 1,
-    marginTop:130,
-    marginBottom:230,
-    borderRadius:15,
-    alignContent:'center',
-    textAlign:'center',
-    backgroundColor:COLORS.white
+    marginTop: 130,
+    marginBottom: 230,
+    borderRadius: 15,
+    alignContent: 'center',
+    textAlign: 'center',
+    backgroundColor: COLORS.white,
   },
-  modaltext:{
-    marginTop:70,
+  modaltext: {
+    marginTop: 70,
     color: COLORS.black,
     fontSize: 35,
     fontWeight: 'bold',
-    textAlign:'center',
-
+    textAlign: 'center',
   },
-  modalbutton:{
-    alignContent:"center",
-    marginLeft:16,
+  modalbutton: {
+    alignContent: 'center',
+    marginLeft: 16,
     height: 40,
-    width: "90%",
-    marginTop:70,
+    width: '90%',
+    marginTop: 70,
     backgroundColor: COLORS.black,
     padding: 10,
     borderColor: 'black',
     borderRadius: 10,
-  }
+  },
+  //Image Picker
+  mainPicker: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    padding: 10,
+    backgroundColor: '#000',
+    alignItems: 'center',
+  },
+  titleText: {
+    fontSize: 22,
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingVertical: 20,
+  },
+
+  textStyle: {
+    padding: 10,
+    color: 'black',
+    textAlign: 'center',
+  },
+  buttonStyle: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 5,
+    marginVertical: 10,
+    width: 250,
+  },
+  imageStyle: {
+    borderColor: COLORS.white,
+    width: 200,
+    height: 200,
+    margin: 5,
+  },
 });
 export default style;

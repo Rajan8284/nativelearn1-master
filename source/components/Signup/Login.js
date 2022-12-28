@@ -20,9 +20,9 @@ const Login = () => {
     handleSubmit,
     isModalVisible,
     setModalVisible,
-    toggleModal
-    } = LoginService();
-  console.log('===>>>', values);
+    toggleModal,
+  } = LoginService();
+  // console.log('Login screan===>>>', isModalVisible);
   return (
     <View style={style.main}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -66,17 +66,18 @@ const Login = () => {
             style={style.button}
             onPress={() => {
               handleSubmit();
-              
             }}>
             <Text style={style.buttontext}>Login</Text>
           </TouchableOpacity>
-          <Button title="Show modal" onPress={()=>setModalVisible(true)} />
         </View>
       </ScrollView>
 
-      {isModalVisible ?
-        <SuccessModal />
-         :""} 
+      {isModalVisible ? (
+        <SuccessModal
+          isModalVisible={isModalVisible}
+          setModalVisible={setModalVisible}
+        />
+      ) : null}
     </View>
   );
 };
