@@ -11,7 +11,7 @@ import {
 import LoginService from '../function.controller/Login.services';
 
 const App = () => {
-  const {path, path1, chooseFile, chooseFile1} = LoginService();
+  const {path, path1, chooseFile, chooseFile1, uploadMedia} = LoginService();
 
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
@@ -33,6 +33,12 @@ const App = () => {
             style={style.buttonStyle}
             onPress={() => chooseFile('video')}>
             <Text style={style.textStyle}>Choose Video</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            style={style.buttonStyle}
+            onPress={() => uploadMedia()}>
+            <Text style={style.textStyle}>Upload File</Text>
           </TouchableOpacity>
         </View>
         <View style={style.container}>

@@ -39,7 +39,7 @@ function postResend(token) {
   return mainWrapper.post(url);
 }
 function postMedia(params) {
-  let url = Constant.imageHost + '/apis/actions/file_upload';
+  let url = Constant.imageHost + 'actions/file_upload';
   return mainWrapper.post(url, params);
 }
 export default ContactService;

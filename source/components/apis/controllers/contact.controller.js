@@ -74,7 +74,12 @@ class ContactController extends React.Component {
   }
 
   async postMediaDetail(data) {
-    let post = {};
+    console.log('REPONSE At Contact controller===>>>>>>', data);
+    let post = {
+      file: 'data:image/png;base64,' + data.assets[0].base64,
+      folder_name: 'chat',
+      type: 'image',
+    };
     let response = await ContactService.postMedia(post);
     return response;
   }

@@ -45,6 +45,8 @@ const LoginService = () => {
   });
   const [otp, setOtp] = useState('');
   const [isModalVisible, setModalVisible] = useState(false);
+  const [path, setPath] = useState(null);
+  const [path1, setPath1] = useState(null);
   const navigation = useNavigation();
   const handleChange = (field, value) => {
     let validation = new Validation(isError);
@@ -56,7 +58,6 @@ const LoginService = () => {
     setValues({...values, [field]: value});
   };
 
-  
   // User Login start <<======
   const handleSubmit = () => {
     let validation = new Validation(isError);
@@ -196,10 +197,9 @@ const LoginService = () => {
       );
     }
   };
+  const [data, setData] = useState(null);
+  // Image Picker functions <<<<=============
 
-  // Upload Media <<<<==========
-  const [path, setPath] = useState(null);
-  const [path1, setPath1] = useState(null);
   // Choose from gallery
   const chooseFile = type => {
     let options = {
@@ -207,13 +207,14 @@ const LoginService = () => {
       maxWidth: 300,
       maxHeight: 400,
       quality: 1,
-      saveToPhotos: true,
       durationLimit: 300,
+      includeBase64: true,
     };
     launchImageLibrary(options, response => {
-      console.log('Response===>> ', response);
+      // console.log('Response===>> ', response);
       //   console.log('Response URI====>>>', response.assets[0].uri);
       if (response.assets) {
+        setData(response);
         setPath(response.assets[0].uri);
       } else if (response.didCancel) {
         Alert.alert('User cancelled camera picker');
@@ -223,7 +224,7 @@ const LoginService = () => {
       }
     });
   };
-
+  // console.log('=======>>>>>>', data);
   //Choose by camera
   const chooseFile1 = type => {
     let options = {
@@ -232,7 +233,6 @@ const LoginService = () => {
       maxHeight: 400,
       quality: 1,
       durationLimit: 300,
-      saveToPhotos: true,
     };
     launchCamera(options, response => {
       if (response.assets) {
@@ -243,14 +243,15 @@ const LoginService = () => {
       }
     });
   };
-  // const uploadMedia = async () => {
-  //   let response = await new ContactController().postMediaDetail(data);
-  //   if (response && response.status) {
-  //     console.log(response);
-  //   } else {
-  //     console.log('Erorrr====>>>');
-  //   }
-  // };
+  //Upload media Using API <<<=========
+  const uploadMedia = async () => {
+    let response = await new ContactController().postMediaDetail(data);
+    if (response && response.status) {
+      console.log(response);
+    } else {
+      console.log('Erorrr====>>>');
+    }
+  };
 
   return {
     email,
@@ -272,7 +273,8 @@ const LoginService = () => {
     path1,
     chooseFile,
     chooseFile1,
-    navigation
+    navigation,
+    uploadMedia,
   };
 };
 
