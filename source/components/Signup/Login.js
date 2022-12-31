@@ -9,6 +9,7 @@ import {Link} from '@react-navigation/native';
 import React, { useState } from 'react';
 import LoginService from '../function.controller/Login.services';
 import style from './Style';
+import { Input,Icon } from '@rneui/themed';
 const Login = () => {
   const {
     values,
@@ -28,7 +29,7 @@ const Login = () => {
         </Text>
         <View style={style.form}>
           <Text style={style.text}>Email Address</Text>
-          <TextInput
+          <Input
             style={style.input}
             placeholder="Enter your Email"
             name="email"
@@ -41,7 +42,22 @@ const Login = () => {
             <Text style={style.showError}>{isError.email.message}</Text>
           ) : null}
           <Text style={style.text}>Enter your password</Text>
-          <TextInput
+          
+           <Input
+            style={style.input}
+            placeholder='Enter your Password'
+            secureTextEntry={showpassword}
+            onChangeText={e => handleChange('password', e)}
+            value={values.password}
+            rightIcon={
+            <Icon
+             name='comment'
+            size={24}
+            color='black'/>
+          }
+              /> 
+
+          {/* <TextInput
             style={style.input}
             placeholder="Enter your Password"
             name="password"
@@ -50,7 +66,7 @@ const Login = () => {
             placeholderTextColor="grey"
             value={values.password}
             onChangeText={e => handleChange('password', e)}
-          />
+          /> */}
           {values.password.length > 0 ? <TouchableOpacity
             onPress={()=>setShowpassword(!showpassword)}>
             <Text style={style.text}>Show password</Text>
