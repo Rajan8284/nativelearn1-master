@@ -6,17 +6,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Link} from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import LoginService from '../function.controller/Login.services';
 import style from './Style';
 const Login = () => {
-  const {
-    values,
-    handleChange,
-    isError,
-    handleSubmit,
-   } = LoginService();
-  const [showpassword,setShowpassword]=useState(true);
+  const {values, handleChange, isError, handleSubmit} = LoginService();
+  const [showpassword, setShowpassword] = useState(true);
 
   return (
     <View style={style.main}>
@@ -51,10 +46,13 @@ const Login = () => {
             value={values.password}
             onChangeText={e => handleChange('password', e)}
           />
-          {values.password.length > 0 ? <TouchableOpacity
-            onPress={()=>setShowpassword(!showpassword)}>
-            <Text style={style.text}>Show password</Text>
-          </TouchableOpacity>:""}
+          {values.password.length > 0 ? (
+            <TouchableOpacity onPress={() => setShowpassword(!showpassword)}>
+              <Text style={style.text}>Show password</Text>
+            </TouchableOpacity>
+          ) : (
+            ''
+          )}
           {isError.password.message ? (
             <Text style={style.showError}>{isError.password.message}</Text>
           ) : null}
@@ -70,7 +68,6 @@ const Login = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
     </View>
   );
 };
