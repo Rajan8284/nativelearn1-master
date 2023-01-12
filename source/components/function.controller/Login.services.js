@@ -166,7 +166,7 @@ const LoginService = () => {
     let validation = new Validation(isError);
     let isValid = validation.isFormValid(recover);
     if (isValid && !isValid.haveError) {
-      if (recover.new_password === recover.confirm_password) {
+      if (recover.new_password !== recover.confirm_password) {
         recoverPassword(token);
       } else {
         console.log('Password match');
